@@ -6,11 +6,11 @@ namespace Domain.Entities.Relations
 {
     public class RelatedBug
     {
-        public int FirstBugId { get; set; }
-        public Bug FirstBug { get; set; }
+        public int RelatedFromId { get; set; }
+        public Bug RelatedFrom { get; set; }
 
-        public int SecondBugId { get; set; }
-        public Bug SecondBug { get; set; }
+        public int RelatedToId { get; set; }
+        public Bug RelatedTo { get; set; }
 
         public string RelationDescription { get; set; }
     }

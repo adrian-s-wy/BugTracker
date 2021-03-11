@@ -8,6 +8,9 @@ namespace Domain.Entities
         public User()
         {
             GroupsMember = new List<GroupMember>();
+            Notes = new List<Note>();
+            Bugs = new List<Bug>();
+            Tasks = new List<DomainTask>();
         }
 
         public int Id { get; set; }
@@ -21,6 +24,8 @@ namespace Domain.Entities
         }
 
         public ICollection<GroupMember> GroupsMember { get; private set; }
-        public ICollection<Note> Notes { get; set; }
+        public ICollection<Note> Notes { get; private set; }
+        public ICollection<Bug> Bugs { get; private set; }
+        public ICollection<DomainTask> Tasks { get; private set; }
     }
 }

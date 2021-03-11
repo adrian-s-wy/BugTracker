@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Infrastructure.Persistence.Configurations
 {
-    public class PriorityConfiguration : IEntityTypeConfiguration<Priority>
+    internal class PriorityConfiguration : IEntityTypeConfiguration<Priority>
     {
         public void Configure(EntityTypeBuilder<Priority> builder)
         {

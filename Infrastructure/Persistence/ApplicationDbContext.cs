@@ -23,5 +23,10 @@ namespace Infrastructure.Persistence
         public DbSet<ProjectVersion> ProjectVersions { get; set; }
         public DbSet<Status> Statuses { get; set; }
         public DbSet<UserGroup> UserGroups { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.ApplyConfigurationsFromAssembly(typeof(ApplicationDbContext).Assembly);
+        }
     }
 }

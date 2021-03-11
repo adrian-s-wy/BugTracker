@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Infrastructure.Persistence.Configurations
 {
-    public class ProjectVersionConfiguration : IEntityTypeConfiguration<ProjectVersion>
+    internal class ProjectVersionConfiguration : IEntityTypeConfiguration<ProjectVersion>
     {
         public void Configure(EntityTypeBuilder<ProjectVersion> builder)
         {
@@ -31,6 +31,15 @@ namespace Infrastructure.Persistence.Configurations
             builder.Property(v => v.ReleaseDate)
                 .HasColumnName("realease_date")
                 .HasColumnType("datetime");
+
+            builder.Property(v => v.ProjectId)
+                .HasColumnName("project_id");
+
+            builder.HasOne(v => v.Project)
+                .WithMany(p => p.ProjectVersions)
+                .HasForeignKey(v => v.ProjectId)
+                .OnDelete(DeleteBehavior.NoAction)
+                .HasConstraintName("FK_project_version_project");
         }
     }
 }

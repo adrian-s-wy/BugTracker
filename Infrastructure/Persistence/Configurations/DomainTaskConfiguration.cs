@@ -4,8 +4,10 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Infrastructure.Persistence.Configurations
 {
-    public class DomainTaskConfiguration : IEntityTypeConfiguration<DomainTask>
+    internal class DomainTaskConfiguration : IEntityTypeConfiguration<DomainTask>
     {
+        private object b;
+
         public void Configure(EntityTypeBuilder<DomainTask> builder)
         {
             builder.HasKey(t => t.Id);
@@ -35,6 +37,42 @@ namespace Infrastructure.Persistence.Configurations
             builder.Property(t => t.DueDate)
                 .HasColumnName("due_date")
                 .HasColumnType("datetime");
+
+            builder.Property(t => t.StatusId)
+                .HasColumnName("status_id");
+
+            builder.HasOne(t => t.Status)
+                .WithMany(s => s.Tasks)
+                .HasForeignKey(t => t.StatusId)
+                .OnDelete(DeleteBehavior.NoAction)
+                .HasConstraintName("FK_task_status");
+
+            builder.Property(t => t.PriorityId)
+                .HasColumnName("priority_id");
+
+            builder.HasOne(t => t.Priority)
+                .WithMany(p => p.Tasks)
+                .HasForeignKey(t => t.PriorityId)
+                .OnDelete(DeleteBehavior.NoAction)
+                .HasConstraintName("FK_task_priority");
+
+            builder.Property(t => t.ProjectVersionId)
+                .HasColumnName("project_version_id");
+
+            builder.HasOne(t => t.ProjectVersion)
+                .WithMany(pv => pv.Tasks)
+                .HasForeignKey(t => t.ProjectVersionId)
+                .OnDelete(DeleteBehavior.NoAction)
+                .HasConstraintName("FK_task_project_version");
+
+            builder.Property(b => b.CreatedById)
+                .HasColumnName("user_id");
+
+            builder.HasOne(t => t.CreatedBy)
+                .WithMany(u => u.Tasks)
+                .HasForeignKey(t => t.CreatedById)
+                .OnDelete(DeleteBehavior.NoAction)
+                .HasConstraintName("FK_task_user");
         }
     }
 }

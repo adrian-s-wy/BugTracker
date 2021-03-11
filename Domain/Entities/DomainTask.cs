@@ -9,8 +9,10 @@ namespace Domain.Entities
     {
         public DomainTask()
         {
-            RelatedTasks = new List<RelatedTask>();
+            RelatedFrom = new List<RelatedTask>();
+            RelatedTo = new List<RelatedTask>();
             BugTasks = new List<BugTask>();
+            Notes = new List<TaskNote>();
         }
 
         public int Id { get; set; }
@@ -33,8 +35,12 @@ namespace Domain.Entities
         public int CreatedById { get; set; }
         public User CreatedBy { get; set; }
 
-        public ICollection<RelatedTask> RelatedTasks { get; private set; }
+        public ICollection<RelatedTask> RelatedFrom { get; private set; }
+
+        public ICollection<RelatedTask> RelatedTo { get; private set; }
 
         public ICollection<BugTask> BugTasks { get; private set; }
+
+        public ICollection<TaskNote> Notes { get; private set; }
     }
 }
