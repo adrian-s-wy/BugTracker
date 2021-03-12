@@ -6,8 +6,6 @@ namespace Infrastructure.Persistence.Configurations
 {
     internal class DomainTaskConfiguration : IEntityTypeConfiguration<DomainTask>
     {
-        private object b;
-
         public void Configure(EntityTypeBuilder<DomainTask> builder)
         {
             builder.HasKey(t => t.Id);
